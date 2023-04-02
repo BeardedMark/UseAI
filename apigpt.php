@@ -1,7 +1,5 @@
 <?php
-
-if (!empty($_POST['message'] || $_POST['key'])) {
-    $_SESSION['key'] = $_POST['key'];
+    // Параметры для запроса
     $headers = array(
         'Content-Type: application/json',
         'Authorization: Bearer ' . $_POST["key"]
@@ -9,6 +7,7 @@ if (!empty($_POST['message'] || $_POST['key'])) {
 
     $data = array(
         "model" => "gpt-3.5-turbo",
+        "temperature" => 0,
         "messages" => array(
             array(
                 "role" => "user",
@@ -28,8 +27,11 @@ if (!empty($_POST['message'] || $_POST['key'])) {
 
     $curl = curl_init();
     curl_setopt_array($curl, $options);
+
     $response = curl_exec($curl);
     curl_close($curl);
+
+
 
     if (!$response) {
         die('Ошибка: Не удалось выполнить запрос к API OpenAI');
@@ -38,15 +40,14 @@ if (!empty($_POST['message'] || $_POST['key'])) {
     $response_data = json_decode($response, true);
 
     if (!$response_data) {
-        die('Ошибка: Не удалось прочитать JSON ответ API OpenAI');
+        die('Ошибка: Не удалось прочитать JSON-ответ от API OpenAI');
     }
 
     if (isset($response_data['choices'][0]['message']['content'])) {
-        echo $response_data['choices'][0]['message']['content'];
-        exit();
+        die($response_data['choices'][0]['message']['content']);
     } else {
-        echo 'Ошибка: API OpenAI не вернул ответа';
+        echo 'Ошибка: API OpenAI не доступен<hr>';
+        // echo $response;
+        $error = json_decode($response, true);
+        echo $error['error']['message'];
     }
-}
-
-?>

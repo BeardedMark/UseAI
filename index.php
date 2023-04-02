@@ -14,13 +14,12 @@
     <link rel="stylesheet" href="style.css">
     <!-- <link rel="stylesheet" href="https://dnlmarket.devirs.com/css/wireframe.css"> -->
 
-    <title>UseAi</title>
+    <title>UseGPT</title>
 </head>
 
 <body>
     <? include_once("chat.php"); ?>
     
-    <script src="functions.js"></script>
     <script src="script.js"></script>
 </body>
 

@@ -1,8 +1,68 @@
 :root {
-    --background: #1E1E1E;
+    --background: #343541;
     --text: #cccccc;
-    --brand: #0E639C;
-    --frame: #2D2D2D;
-    --overframe: #3C3C3C;
+    --brand: #10a37f;
+    --frame: #40414F;
+    --overframe: #444654;
     --subframe: #252526;
+    --underframe: #2A2B32;
+}
+
+.link {
+    position: relative;
+    text-decoration: none;
+    color: var(--text);
+    transition: .5s;
+}
+
+.link:hover {
+    color: var(--brand);
+}
+
+.lock {
+    opacity: .3;
+    transition: .5s;
+    pointer-events: none;
+    filter: blur(1px);
+    position: relative;
+}
+
+.frame {
+    background: var(--frame);
+    border: 1px solid transparent;
+    padding: 20px;
+    transition: .5s;
+    border-radius: 14px;
+}
+
+.fly {
+    transition: .8s;
+}
+
+.fly:hover {
+    transform: translateY(-2px);
+    position: relative;
+    z-index: 9999 !important;
+    box-shadow: 0px 75px 80px rgba(0, 0, 0, 0.07), 0px 31.33px 33.42px rgba(0, 0, 0, 0.25), 0px 16.75px 17.86px rgba(0, 0, 0, 0.2), 0px 9.39px 10.01px rgba(0, 0, 0, 0.15), 0px 4.98px 5.32px rgba(0, 0, 0, 0.1), 0px 2.07px 2.21px rgba(0, 0, 0, 0.05);
+}
+
+.shy {
+    position: fixed;
+    z-index: 2030;
+    transition: .5s;
+
+    padding: 5vw;
+    opacity: 0;
+    background: var(--background);
+    pointer-events: none;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.shy:target {
+    opacity: 1;
+    pointer-events: auto;
 }
