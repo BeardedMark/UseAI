@@ -1,44 +1,42 @@
-const messages = [
-    {
-      "text": "Hello!",
-      "user": "user"
-    },
-    {
-      "text": "How are you?",
-      "user": "AI"
-    }
-  ];
-  
-  const data = {
-    "model": "text-davinci-002",
-    "messages": messages,
-    "temperature": 0.5,
-    "n": 1,
-    "max_tokens": 50,
-    "stream": true,
-    "stop": "\n",
-    "logit_bias": {
-      "50256": -10,
-      "49411": 20
-    },
-    "user": "12345"
-  };
-  
-  $.ajax({
-    url: "https://api.openai.com/v1/chat/completions",
-    type: "POST",
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader("Authorization", "Bearer " + ACCESS_TOKEN);
-    },
-    contentType: "application/json",
-    data: JSON.stringify(data),
-    success: function(data, status, xhr) {
-      console.log("Response: ", data);
-    },
-    error: function(xhr, status, error) {
-      console.error(error);
-    },
-    dataType: "text event-stream"
-  }).done(function() {
-    console.log("Stream completed.");
-  });
+// $.ajax({
+//   type: 'POST',
+//   url: 'https://api.openai.com/v1/chat/completions',
+//   headers: {
+//     'Content-Type': 'application/json',
+//     'Authorization': 'Bearer ' + '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',
+//   },
+//   data: JSON.stringify({
+//     "model": "gpt-3.5-turbo",
+//     "messages": {
+//       "role": "user",
+//       "content": "Какого ты пола?"
+//     }
+//   }),
+//   success: function (response) {
+//     console.log(response.choices[0].message.content);
+//   },
+//   error: function (XMLHttpRequest, textStatus, errorThrown) {
+//     console.log("Status: " + textStatus);
+//     console.log("Error: " + errorThrown);
+//     $('#console').html(XMLHttpRequest);
+//   }
+// });
+
+// Создаем новое соединение SSE
+var source = new EventSource("https://api.openai.com/v1/chat/completions/stream?model=gpt-3.5-turbo&api_key=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");
+
+// Обработчик события "message"
+source.addEventListener("message", function(event) {
+  // Получаем данные из события
+  var data = JSON.parse(event.data);
+  // Получаем текст сообщения из данных
+  var message = data.choices[0].text;
+  // Выводим текст сообщения в консоль
+  console.log(message);
+}, false);
+
+// Обработчик события "error"
+source.addEventListener("error", function(event) {
+  // Выводим текст ошибки в консоль
+  console.error("SSE error:", event);
+}, false);

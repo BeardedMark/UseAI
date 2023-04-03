@@ -66,3 +66,12 @@
     opacity: 1;
     pointer-events: auto;
 }
+
+.todot{
+    opacity: 0;
+    transform: scale(0) rotateZ(-30deg);
+}
+
+.active{
+    color: var(--brand);
+}

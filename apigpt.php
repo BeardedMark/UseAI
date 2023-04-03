@@ -8,6 +8,8 @@
     $data = array(
         "model" => "gpt-3.5-turbo",
         "temperature" => 0,
+        "n" => 1,
+        "max_tokens" => 100,
         "messages" => array(
             array(
                 "role" => "user",
