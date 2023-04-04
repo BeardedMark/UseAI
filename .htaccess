@@ -1,0 +1,4 @@
+# Любая ссылка кроме /index.php
+RewriteCond %{REQUEST_URI} !.php$
+# Перенаправление на index.php
+RewriteRule ^(.*)$ index.php [L]

@@ -1,10 +1,16 @@
+/* 
+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
+*/
+
+
 /* События */
 
 // Загрузка документа
 // Событие которое срабатывает после загрузки документа
 $(document).ready(function () {
     $("#message-input").focus();
-    $("#menu").hide();
+    SpaceFixed();
+    ActivateCurrentUrl()
 
     if (!sessionStorage.getItem('API-KEY')) {
         $("#set-api-key").addClass("active")
@@ -13,8 +19,10 @@ $(document).ready(function () {
             sessionStorage.setItem('API-KEY', key);
         } else {
             sessionStorage.removeItem('API-KEY');
+            sessionStorage.setItem('API-KEY', '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');
         }
     }
+
 });
 
 // Отправить сообщение
@@ -65,7 +73,6 @@ $("#set-api-key").click(function () {
     } else {
         sessionStorage.removeItem('API-KEY');
     }
-    // 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
 });
 
 // Открытие меню
@@ -96,17 +103,33 @@ $("#console-log").click(function () {
 // $.removeCookie('myCookie', { path: '/' });
 // console.log(myCookieValue);
 
+function ActivateCurrentUrl() {
+    let currentUrl = window.location.href;
+    let path = currentUrl.replace(window.location.origin, '');
+    $('a').each(function () {
+        if ($(this).attr('href') == path) {
+            $(this).addClass('active');
+        }
+    });
+}
+
+
 // Воспроизведение текста
 // Функция озвучки текста который передается параметром
 function Speech(text) {
     window.speechSynthesis.cancel();
     const msg = new SpeechSynthesisUtterance(text);
 
+
+    const voices = window.speechSynthesis.getVoices();
+    const maleVoice = voices.find((voice) => voice.name === 'Microsoft David Desktop - Russian');
+    msg.voice = maleVoice;
+
     // msg.voice = speechSynthesis.getVoices()[16]; // голос
     msg.volume = 1; // громкость
-    msg.rate = 1; // скорость
+    msg.rate = 1.2; // скорость
     msg.pitch = 1; // высота
-    msg.lang = 'ru-RU'; // язык
+    // msg.lang = 'ru-RU'; // язык
     window.speechSynthesis.speak(msg);
 }
 
@@ -168,40 +191,42 @@ function MsgInputHeight() {
     e.height(e.prop('scrollHeight') + 'px');
 }
 
+function SpaceFixed() {
+    var fixedTop = $('.fixed-top');
+    var fixedBottom = $('.fixed-bottom');
 
+    $('.main').css('margin-top', fixedTop.height() + 'px');
+    $('.main').css('margin-bottom', fixedBottom.height() + 'px');
 
+    var lastScrollTop = 0;
+    var isVisible = true;
+    $(window).scroll(function () {
+        var currentScrollTop = $(this).scrollTop();
 
-
-var fixedTop = $('.fixed-top');
-var fixedBottom = $('.fixed-bottom');
-
-$('.main').css('margin-top', fixedTop.height() + 'px');
-$('.main').css('margin-bottom', fixedBottom.height() + 'px');
-
-var lastScrollTop = 0;
-var isVisible = true;
-$(window).scroll(function () {
-    var currentScrollTop = $(this).scrollTop();
-
-    // изменить
-    if (currentScrollTop < lastScrollTop && currentScrollTop < $(document).height() - $(window).height) {
-        if (isVisible) {
-            fixedTop.animate({ top: -fixedTop.height() + 'px' }, 300);
-            fixedBottom.animate({ bottom: -fixedBottom.height() + 'px' }, 300);
-            $('.main').animate({ marginBottom: '0px' }, 300);
-            isVisible = false;
+        // изменить
+        if (currentScrollTop < lastScrollTop && currentScrollTop < $(document).height() - $(window).height) {
+            if (isVisible) {
+                fixedTop.animate({ top: -fixedTop.height() + 'px' }, 300);
+                fixedBottom.animate({ bottom: -fixedBottom.height() + 'px' }, 300);
+                $('.main').animate({ marginBottom: '0px' }, 300);
+                isVisible = false;
+            }
         }
-    }
 
-    // вернуть
-    else {
-        if (!isVisible) {
-            fixedTop.animate({ top: '0px' }, 300);
-            fixedBottom.animate({ bottom: '0px' }, 300);
-            $('.main').animate({ marginBottom: fixedBottom.height() + 'px' }, 300);
-            isVisible = true;
+        // вернуть
+        else {
+            if (!isVisible) {
+                fixedTop.animate({ top: '0px' }, 300);
+                fixedBottom.animate({ bottom: '0px' }, 300);
+                $('.main').animate({ marginBottom: fixedBottom.height() + 'px' }, 300);
+                isVisible = true;
+            }
         }
-    }
 
-    lastScrollTop = currentScrollTop;
-});
+        lastScrollTop = currentScrollTop;
+    });
+}
+
+
+
+

@@ -73,5 +73,5 @@
 }
 
 .active{
-    color: var(--brand);
+    color: var(--brand) !important;
 }

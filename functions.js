@@ -21,15 +21,29 @@ recognition.onresult = (event) => {
     document.querySelector('#message-input').value = text + interim_transcript; //выводим распознанный текст на страницу
 };
 
-
 $("#rec-message").on('mousedown touchstart',function () {
     recognition.start();
-    recognizing = true;
 });
 $("#rec-message").on('mouseup touchend',function () {
     setTimeout(function() {
         recognition.stop();
-        recognizing = false;
     }, 2000);
 });
+
+
+
+
+// Автоматическая запись с микрофона
+
+// document.querySelector('#auto-rec').addEventListener('change', (event) => {
+//     if (event.target.checked && !recognizing) {
+//         recognition.start();
+//         recognizing = true;
+//     } else if (!event.target.checked && recognizing) {
+//         setTimeout(function() {}, 1000);
+//         recognition.stop();
+//         recognizing = false;
+//         MessageSend();
+//     }
+// });
 

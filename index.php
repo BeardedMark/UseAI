@@ -11,17 +11,27 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
-
+    <link rel="icon" type="image/x-icon" href="/svh/favicon.png">
     <link rel="stylesheet" href="properties.css">
     <link rel="stylesheet" href="style.css">
     <!-- <link rel="stylesheet" href="https://dnlmarket.devirs.com/css/wireframe.css"> -->
 
-    <title>UseGPT</title>
+    <title id="title">UseGPT</title>
 </head>
 
 <body>
-    <? include_once("chat.php"); ?>
-    
+    <? include_once('src/header.php') ?>
+
+    <main class="main">
+        <?php
+        $url = $_SERVER['REQUEST_URI'];
+        $path = parse_url($url, PHP_URL_PATH);
+        include_once(ltrim($path, '/') . ".php");
+        ?>
+
+
+    </main>
+
     <script src="script.js"></script>
     <script src="functions.js"></script>
 </body>

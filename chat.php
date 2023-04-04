@@ -1,30 +1,22 @@
-<? include('src/header.php') ?>
+<div class="container py-3">
+    <div class="row gy-3">
+        
 
-<main class="main">
-    <div id="menu" class="position-fixed container min-vw-100">
-        <div class="row">
-            <div class="col col-auto">
-                <? include_once 'src/sidebar.php' ?>
-            </div>
-        </div>
-    </div>
-    <div class="container py-3">
-        <div class="row gy-3">
-            <div class="col">
-                
-                <div class="message-list">
-                    <div class="row gy-2" id="messages">
-                    </div>
-                    <div class="row gy-2">
-                        <div class="col me-auto col-4 col-sm-4 col-md-3 col-lg-2 ">
-                            <img id="typing" class="sticker todot" src="https://sun3-21.userapi.com/uZ9DikPdA6w8USgzEIcTcPM52tZDSYOraXZv-A/LFYPss86mxg.png" alt="">
-                        </div>
+        <div class="col">
+
+            <div class="message-list">
+                <div class="row gy-2" id="messages">
+                </div>
+                <div class="row gy-2">
+                    <div class="col me-auto col-4 col-sm-4 col-md-3 col-lg-2 ">
+                        <img id="typing" class="sticker todot" src="https://sun3-21.userapi.com/uZ9DikPdA6w8USgzEIcTcPM52tZDSYOraXZv-A/LFYPss86mxg.png" alt="">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
+
 
 <footer class="footer fixed-bottom">
     <div class="container py-3">
